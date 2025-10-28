@@ -1,8 +1,9 @@
 pipeline{
+    agent any
     environment {
         EC2_USER='ec2-user'
         EC2_HOST="34.201.242.131"
-        SSH_KEY= Downloads/mathi_key.pem
+        SSH_KEY_PATH='Downloads/mathi_key.pem'
         REPO_URL='https://github.com/Mathibhavan/Week-2.git'
         BRANCH='master'
         DEPLOY_DIR='VAR/WWW/html'
