@@ -11,8 +11,8 @@ pipeline{
     stages{
         stage('Checkout'){
             steps{
-            git url: ${REPO_URL}
-            git checkout ${BRANCH}
+            git url: "${REPO_URL}"
+            git branch: "${BRANCH}"
             }
         }
         stage('Deploy to EC2 instance'){
