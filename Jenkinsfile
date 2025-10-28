@@ -9,17 +9,20 @@ pipeline{
         DEPLOY_DIR='VAR/WWW/html'
     }
     stages{
-        stage('Checkout')
-        steps{
+        stage('Checkout'){
+            steps{
             git url: ${REPO_URL}
             git checkout ${BRANCH}
+            }
         }
-        stage('Deploy to EC2 instance')
-        steps{
+        stage('Deploy to EC2 instance'){
+            steps{
             sh """
+                chmod 600 ${SSH_KEY}
                 ssh -i ${SSH_KEY_PATH} -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} 'rm -rf ${DEPLOY_DIR}/*'
                 scp -i ${SSH_KEY_PATH} -o StrictHostKeyChecking=no -r * ${EC2_USER}@${EC2_HOST}:${DEPLOY_DIR}
                 """
+            }
         }
     }
     post{
