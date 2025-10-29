@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment {
         EC2_USER='ec2-user'
-        EC2_HOST="34.201.242.131"
+        EC2_HOST="44.201.254.15"
         //SSH_KEY_PATH='C:/ProgramData/Jenkins/.jenkins/keys/mathi_key.pem'
         REPO_URL='https://github.com/Mathibhavan/Week-2.git'
         BRANCH='master'
