@@ -17,10 +17,10 @@ pipeline{
         stage('Deploy to EC2 instance') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ec2_ssh_key', keyFileVariable: 'SSH_KEY_PATH')]) {
-                    sh(script: """
-                        ssh -i "${SSH_KEY_PATH}" -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} "sudo mkdir -p ${DEPLOY_DIR} && rm -rf ${DEPLOY_DIR}/*"
-                        scp -i "${SSH_KEY_PATH}" -o StrictHostKeyChecking=no -r Jenkinsfile Week-2.docx index.html style.css welcome.html ${EC2_USER}@${EC2_HOST}:${DEPLOY_DIR}
-                    """, returnStatus: true)
+                    sh(script: '''
+                        ssh -i "${SSH_KEY_PATH}" -o StrictHostKeyChecking=no '"${EC2_USER}"'@"${EC2_HOST}" "sudo mkdir -p ${DEPLOY_DIR} && sudo rm -rf ${DEPLOY_DIR}/*"
+                        scp -i "${SSH_KEY_PATH}" -o StrictHostKeyChecking=no -r Jenkinsfile Week-2.docx index.html style.css welcome.html '"${EC2_USER}"'@"${EC2_HOST}":"${DEPLOY_DIR}"
+                    ''', returnStatus: true)
                 }
             }
         }
